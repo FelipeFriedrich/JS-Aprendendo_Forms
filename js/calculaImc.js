@@ -2,7 +2,6 @@ var titulo = document.querySelector(".titulo");
 titulo.textContent = "Mario Nutrição";
 
 var pacientes = document.querySelectorAll(".paciente");
-console.log(pacientes);
 
 
 for(var i = 0; i < pacientes.length; i++){
@@ -12,23 +11,22 @@ for(var i = 0; i < pacientes.length; i++){
     var tdAltura = paciente.querySelector(".info-altura");
     var altura = tdAltura.textContent;
     var tdImc = paciente.querySelector(".info-imc");
-    var imcValido = true;
+    var pesoEValido = validaPeso(peso);
+    var AlturaEValido = validaAltura(altura);
 
-    if(peso <= 0 || peso > 500){
+    if(!pesoEValido){
         console.log("Peso Invalido!");
         tdImc.textContent = "Peso Inválido";
-        imcValido = false;
         paciente.classList.add("paciente-invalido");
     }
 
-    if (altura <= 0 || altura > 3.00){
+    if (!AlturaEValido){
         console.log("Altura Inválida");
         tdImc.textContent = "Altura Inválida";
-        imcValido = false;
         paciente.classList.add("paciente-invalido");
     }
 
-    if(imcValido){
+    if(pesoEValido && AlturaEValido){
         var imc = calculaImc(peso, altura);
         tdImc.textContent = imc;
    
@@ -41,3 +39,20 @@ function calculaImc(peso,altura){
     imc = peso / (altura * altura);
     return imc.toFixed(2);
 }
+
+function validaPeso(peso){
+    if(peso > 0 && peso <=500 ){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function validaAltura(altura){
+    if(altura > 0 && altura <=3 ){
+        return true;
+    }else{
+        return false;
+    }
+}
+
