@@ -8,7 +8,7 @@ botaoAdicionar.addEventListener("click",function(event){
     
     //cria a linha na tabela e coloca a informação
     
-    var trPaciente = montaLinha(paciente);
+    
     var erros = validaPaciente(paciente);
 
     if(erros.length > 0){
@@ -16,17 +16,23 @@ botaoAdicionar.addEventListener("click",function(event){
         exibeMensagensDeErro(erros);
         return;
     }
+    adicionarPaciente(paciente);
 
     var ul = document.querySelector("#mensagens-erro");
     ul.innerHTML = "";
     //atribui a linha a tabela.
     
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(trPaciente);
+   
     form.reset();
-    var ul = limpaUlDeErro();
+    var ul = limpaUlDeErro();   
 
 });
+
+function adicionarPaciente(paciente){
+    var trPaciente = montaLinha(paciente);
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(trPaciente);
+}
 
 function exibeMensagensDeErro(erros){
     var ul = limpaUlDeErro();
